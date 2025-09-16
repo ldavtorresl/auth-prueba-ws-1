@@ -1,5 +1,7 @@
 package com.security.sec.serviceIpml;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,19 +21,26 @@ import com.security.sec.service.AuthService;
 
 @Service
 public class AuthServiceImpl implements AuthService{
+	 private static final Logger log = LoggerFactory.getLogger(AuthServiceImpl.class);
+	 
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private TokenProvider tokenProvider;
+	@Autowired 
+	private UsuarioRepository usuarioRepository;
 	
-	@Autowired UsuarioRepository usuarioRepository;
-	
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	public AuthServiceImpl(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
+	
+
 	@Override
 	public AuthResponse login(LoginRequest loginRequest) {
+	
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 

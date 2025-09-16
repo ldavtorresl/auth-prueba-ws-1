@@ -36,7 +36,7 @@ public class SecurityConfigPathAccess {
 		.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 		.exceptionHandling(exception -> exception.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
 			.authorizeHttpRequests((authz) -> authz
-				.requestMatchers("/signup","/login").permitAll()
+				.requestMatchers("/signup","/login","/h2-console/**","auth/**","/h2-console/login").permitAll()
 				.anyRequest()
 				.authenticated());
 		return http.build();

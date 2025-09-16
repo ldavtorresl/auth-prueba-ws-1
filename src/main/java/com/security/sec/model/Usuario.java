@@ -13,7 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "usuario", schema = "bdprueba")
+@Table(name = "usuario")
 public class Usuario implements UserDetails{
 
 	/**
